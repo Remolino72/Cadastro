@@ -11,7 +11,8 @@ BG_YELLOW = '#ffcc66'
 
 # -------------Var
 cities = ["Juticalpa", "Arimis"]
-sectors = ["1", "2", "3", "4" ]
+sectors_jut = ["1", "2", "3", "4"]
+sectors_ari = ["1", "2"]
 analysis = ["Landsat", "Cadastro", "Urban Sprawl", "Negative Space", "Roads", "Land Uses"]
 FONT_NAME = "Courier"
 FONT_SIZE = 14
@@ -23,15 +24,20 @@ FONT_STYLE = (FONT_NAME, FONT_SIZE, FONT_TYPE)
 
 def selection(i):
     if my_city.get() == "Juticalpa":
-        my_sectors.config(value=[sectors])
-        my_sectors.config(value=["1", "2", "3", "4", "5"])
-        my_sectors.current([0])
+        my_sectors.config(value=sectors_jut)
         map_base.config(file="landSat/JuticalpaSectors.png")
 
     if my_city.get() == "Arimis":
-        my_sectors.config(value=[sectors])
-        my_sectors.config(value=["1", "2", "3"])
+        my_sectors.config(value=sectors_ari)
         my_sectors.current([0])
+
+def sector_select(i):
+    if my_sectors.get() == "1":
+        map_base.config(file="LandSat/JutSector_01.png")
+
+
+
+
 # -------------------------------- GUI-------------------------
 root.title("----Catastro 101----")
 root.geometry("672x504")
@@ -66,19 +72,25 @@ label_sectors.config(fg=BG_GREY, font=FONT_STYLE, anchor="w")
 label_sectors.place(x=20, y=160)
 my_sectors = ttk.Combobox(root, value=[""])
 my_sectors.place(x=20, y=190)
+# bindingbox--------------------
+my_sectors.bind("<<ComboboxSelected>>", sector_select)
 
 label_sys = Label(root, text="Analysis")
 label_sys.config(fg=BG_GREY, font=FONT_STYLE, anchor="w")
 label_sys.place(x=20, y=220)
-my_sys = ttk.Combobox(root, value=[""])
-my_sys.place(x=20, y=250)
+# my_sys = ttk.Combobox(root, value=[""])
+# my_sys.place(x=20, y=250)
+
+# --------------------List boxes-------------------
+my_list = Listbox(root, width=23)
+my_list.place(x=20, y=250)
 
 # ------------- Buttons ------------------------
 
-enter_button = Button(text="Select", relief=RIDGE, justify=CENTER,
+enter_button = Button(text="Print", relief=RIDGE, justify=CENTER,
 
 activeforeground="black", width=12, font=FONT_STYLE, bg=BG_BLUE)
-enter_button.place(x=20, y=400)
+enter_button.place(x=20, y=440)
 
 
 
