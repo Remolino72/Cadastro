@@ -14,26 +14,38 @@ cities = ["Juticalpa", "Arimis"]
 sectors_jut = ["1", "2", "3", "4"]
 sectors_ari = ["1", "2"]
 analysis = ["Landsat", "Cadastro", "Urban Sprawl", "Negative Space", "Roads", "Land Uses"]
+s_img_juti = ["LandSat/JutSector_01.png", "LandSat/JutSector_02.png",
+                 "LandSat/JutSector_03.png", "LandSat/JutSector_04.png"]
+s_img_ari = ["LandSat/AriSector_01", "LandSat/AriSector_02"]
 FONT_NAME = "Courier"
 FONT_SIZE = 14
 FONT_TYPE = "normal"
 FONT_STYLE = (FONT_NAME, FONT_SIZE, FONT_TYPE)
-
-
+global img_list
+img_list = []
 #-----------------------------Menu Interaction ----------------------------
 
 def selection(i):
+    global img_list
     if my_city.get() == "Juticalpa":
+        img_list = s_img_juti
         my_sectors.config(value=sectors_jut)
         map_base.config(file="landSat/JuticalpaSectors.png")
 
     if my_city.get() == "Arimis":
+        img_list = s_img_ari
         my_sectors.config(value=sectors_ari)
-        my_sectors.current([0])
+        map_base.config(file="landSat/ArimisSectors.png")
 
-def sector_select(i):
-    if my_sectors.get() == "1":
-        map_base.config(file="LandSat/JutSector_01.png")
+def sector_select(n):
+    global img_list
+    for i in range(len(img_list)+1):
+        ii = i - 1
+        if i == int(my_sectors.get()):
+            print(my_sectors.get())
+            map_base.config(file=img_list[ii])
+            print(ii)
+            continue
 
 
 
