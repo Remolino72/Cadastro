@@ -37,6 +37,8 @@ def selection(i):
         my_sectors.config(value=sectors_ari)
         map_base.config(file="landSat/ArimisSectors.png")
 
+# ---------------------Sectors selections------------
+# Iteraction trough list
 def sector_select(n):
     global img_list
     for i in range(len(img_list)+1):
@@ -45,8 +47,6 @@ def sector_select(n):
             print(my_sectors.get())
             map_base.config(file=img_list[ii])
             print(ii)
-            continue
-
 
 
 
